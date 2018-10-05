@@ -7,7 +7,7 @@
 ###############################################################################
 
 # El compilador a usar: Gnu C Compiler, Standard 2011 with GNU extensions
-CC=g++
+CC=g++ -std=c++17
 # La carpeta donde va todo el código
 SRC=src
 # La carpeta donde van todos los archivos de objeto
@@ -43,7 +43,7 @@ LIB=$(MTH)
 COMMON=
 
 # Directorios que serán compilados a un programa
-PROGRAMS=1_hello_world 2_fraction
+PROGRAMS=0_hello_world 11_fraction 12_inline 21_rpn 22_pvector
 
 # Todos los directorios que contienen archivos de código
 SRCDIR=$(COMMON) $(PROGRAMS)
