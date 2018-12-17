@@ -1,4 +1,3 @@
-// Importo el archivo arraylist.h
 #include "fraction.h"
 
 #include <string>

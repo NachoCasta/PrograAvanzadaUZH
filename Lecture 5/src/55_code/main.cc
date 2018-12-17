@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+template <class BinOp, class Op1, class Op2>
+class somefunction_t : public unary_function<typename Op1::argument_type, typename BinOp::result_type> {
+protected:
+  BinOp o;
+  Op1 o1;
+  Op2 o2;
+public:
+  somefunction_t(BinOp binop, Op1 op1, Op2 op2) : o(binop), o1(op1), o2(op2) {}
+  typename BinOp::result_type operator()(const typename Op1::argument_type &x) {
+    return o(o1(x),o2(x));
+  }
+};
+
+class BothTrue {
+public:
+  typedef bool result_type;
+  bool operator()(bool a, bool b) {
+    return a && b;
+  }
+};
+
+class DivisibleInt {
+public:
+  int value;
+  typedef int argument_type;
+  DivisibleInt(int v): value(v) { }
+  bool operator()(int x) {  // Says if the int is divisible by x
+    return value % x == 0;
+  }
+};
+
+int main(int argc, char *argv[])
+{
+  BothTrue op;
+  DivisibleInt op1(35);
+  DivisibleInt op2(20);
+  somefunction_t<BothTrue, DivisibleInt, DivisibleInt> func(op, op1, op2);
+  int x1 = 5;
+  cout << op1.value << " and " << op2.value << " are " << (func(x1) ? "" : "not ") << "both divisible by " << x1 << endl;
+  int x2 = 2;
+  cout << op1.value << " and " << op2.value << " are " << (func(x2) ? "" : "not ") << "both divisible by " << x2 << endl;
+  return 0;
+}
