@@ -16,7 +16,7 @@
 - [ ] 5. **Erklaeren Sie die Bedeutung des Schluesselwortes constexpr und in welcher Situation dieses sinnvollerweise eingesetzt werden kann.**
    (Explain the meaning of the keyword constexpr and in which situation it can be usefully used.)
 
-- [ ] 6. **Erklaeren Sie die Bedeutung des Schluesselwortes inline und wie dieses sinnvollerweise eingesetzt werden kann, insbesondere im Zusammenhang von Projekten, die aus mehreren Objektdateien bestehen (und auch insbesondere wenn „link-time optimization“ nicht zur Verfuegung steht).**
+- [x] 6. **Erklaeren Sie die Bedeutung des Schluesselwortes inline und wie dieses sinnvollerweise eingesetzt werden kann, insbesondere im Zusammenhang von Projekten, die aus mehreren Objektdateien bestehen (und auch insbesondere wenn „link-time optimization“ nicht zur Verfuegung steht).**
    (Explain the meaning of the keyword inline and how it can be reasonably used, especially in the context of projects that consist of several object files (and especially if "link-time optimization" is not available).)
 
    The inline keyword is used before a function declaration to create an "inline function". This has to be declared in a header file and the compiler will replace every call to this function with the function body, so that your program doesn't have to call the function all the time. It's very useful if you have a simple function that you use in many places but you don't want to copy and paste the same code all over your code
@@ -33,8 +33,8 @@
 - [ ] 10. **Was ist der unterschied zwischen einer virtuellen und nicht virtuellen "member function" (Methode)?  Wozu dient die virtuelle Methodentabelle?**
    (What is the difference between a virtual and a non-virtual "member function" (method)? What is the virtual method table for?)
 
-- [ ] 11. **C++ erlaubt es die Operatoren +, -, *, /, etc zu ueberladen.  Worauf sollte man dabei (im Allgemeinen) im Sinne der Lesbarkeit des Programmes aufpassen?**
-   (C ++ allows the operators +, -, *, /, etc to be overloaded. What should be taken care of (in general) in terms of the readability of the program?)
+- [ ] 11. **C++ erlaubt es die Operatoren +, -, ``*``, /, etc zu ueberladen.  Worauf sollte man dabei (im Allgemeinen) im Sinne der Lesbarkeit des Programmes aufpassen?**
+   (C ++ allows the operators +, -, ``*``, /, etc to be overloaded. What should be taken care of (in general) in terms of the readability of the program?)
 
 - [ ] 12. **Was besagt die „rule of three“? Wieso ist sie so wichtig?**
    (What does the "rule of three" mean? Why is she so important?)
@@ -60,8 +60,8 @@
 - [ ] 19. **Vergleichen Sie eine trait Klasse mit einer puren virtuellen Klasse („interface“).**
    (Compare a trait class with a pure virtual class ("interface").)
 
-- [ ] 20. **Weshalb werden in C++ (wie auch in C) Headerdateien (*.h) benoetigt? Welche Artifakte gehoeren daher prinzipiell in die Headerdatei?**
-   (Why are header files (* .h) required in C ++ (as well as in C)? Which artifacts are therefore part of the header file?)
+- [ ] 20. **Weshalb werden in C++ (wie auch in C) Headerdateien (``*``.h) benoetigt? Welche Artifakte gehoeren daher prinzipiell in die Headerdatei?**
+   (Why are header files (``*`` .h) required in C ++ (as well as in C)? Which artifacts are therefore part of the header file?)
 
 - [ ] 21. **Wozu wird der move constructor verwendet?**
    (What is the move constructor used for?)
