@@ -21,11 +21,15 @@
 
    The inline keyword is used before a function declaration to create an "inline function". This has to be declared in a header file and the compiler will replace every call to this function with the function body, so that your program doesn't have to call the function all the time. It's very useful if you have a simple function that you use in many places but you don't want to copy and paste the same code all over your code
 
-- [ ] 7. **Unter welchen Umstaenden gehoeren templates und als inline deklarierte Funktionen in die Headerdatei (*.h) und unter welchen in die Implementierungsdatei (*.cc)? Erklaeren Sie weshalb.**
+- [x] 7. **Unter welchen Umstaenden gehoeren templates und als inline deklarierte Funktionen in die Headerdatei (*.h) und unter welchen in die Implementierungsdatei (*.cc)? Erklaeren Sie weshalb.**
    (Under what circumstances do templates and inline declared functions belong in the header file (* .h) and under which in the implementation file (* .cc)? Explain why.)
 
-- [ ] 8. **Erklaeren Sie die Bedeutung des Schluesselwortes friend und wo dieses sinnvollerweise eingesetzt werden kann.**
+  Under every circumstance templates and inline declared functions have to go in the header file, because the code needs to be known in compile time.
+
+- [x] 8. **Erklaeren Sie die Bedeutung des Schluesselwortes friend und wo dieses sinnvollerweise eingesetzt werden kann.**
    (Explain the meaning of the keyword friend and where this can be meaningfully used.)
+
+   It lets you declare another class or function as a friend, which lets them access private and protected members of the class where the friend declaration appears. One of the use cases would be when defining the std::istream and std::ostream operators.
 
 - [ ] 9. **Erklaeren Sie den Unterschied zwischen Pointer und Reference. Worauf ist insbesondere bei Objekten, die auf dem Stack liegen aufzupassen?**
    (Explain the difference between Pointer and Reference. What is especially important for watching objects that are on the stack?)
