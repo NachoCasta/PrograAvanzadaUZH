@@ -49,11 +49,19 @@
 - [ ] 10. **Was ist der unterschied zwischen einer virtuellen und nicht virtuellen "member function" (Methode)?  Wozu dient die virtuelle Methodentabelle?**
    (What is the difference between a virtual and a non-virtual "member function" (method)? What is the virtual method table for?)
 
-- [ ] 11. **C++ erlaubt es die Operatoren +, -, ``*``, /, etc zu ueberladen.  Worauf sollte man dabei (im Allgemeinen) im Sinne der Lesbarkeit des Programmes aufpassen?**
+- [x] 11. **C++ erlaubt es die Operatoren +, -, ``*``, /, etc zu ueberladen.  Worauf sollte man dabei (im Allgemeinen) im Sinne der Lesbarkeit des Programmes aufpassen?**
    (C ++ allows the operators +, -, ``*``, /, etc to be overloaded. What should be taken care of (in general) in terms of the readability of the program?)
 
-- [ ] 12. **Was besagt die „rule of three“? Wieso ist sie so wichtig?**
+   We should always adhere to mathematical properties and laws so that our operators make sense. For example we should to take associativity, commutativity, reflexivity, symmetry and transitivity into consideration and make sure that it is fulfilled.
+
+- [x] 12. **Was besagt die „rule of three“? Wieso ist sie so wichtig?**
    (What does the "rule of three" mean? Why is she so important?)
+
+   It says that if you implement either of the following three, you most likely need all three of them:
+   - Copy Constructor
+   - Assignment Operator
+   - Destructor
+   It's important to make sure that we are managing the memory in the right way and that we are not leaving unfreed memory somewhere in the way.
 
 - [ ] 13. **Wie werden in C++ ueblicherweise benutzerdefinierte Ein- und Ausgaberoutinen implementiert?  Was ist im Fehlerfall zu beachten?**
    (How is custom input and output routines implemented in C ++? What should be considered in case of error?)
