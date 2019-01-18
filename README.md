@@ -1,17 +1,30 @@
 # PrograAvanzadaUZH
 
 ## Preguntas Examen
-- [ ] 1. **Wie koennen Mitglieder einer Klasse („class members“) im Konstruktor initialisiert warden, unabhaengig davon ob diese Mitglieder ueber einen „default constructor“ verfuegen oder nicht?**
+- [x] 1. **Wie koennen Mitglieder einer Klasse („class members“) im Konstruktor initialisiert warden, unabhaengig davon ob diese Mitglieder ueber einen „default constructor“ verfuegen oder nicht?**
    (How can members of a class (class members) be initialized in the constructor, regardless of whether these members have a default constructor or not?)
+
+   In the `:` section. This will initialize the members skipping the default constructor.
+   Example:
+     `Fraction(int numerator, int denominator): n(numerator), d(denominator) { ... }`
 
 - [ ] 2. **Wie kann man verhindern, daß die vom Compiler generierten Klassenartefakte versehentlich verwendet werden (mit und ohne Verwendung von C++11 Funktionalitaet)?**
    (How can you prevent the compiler-generated class artifacts from being inadvertently used (with and without the use of C ++ 11 functionality)?)
 
-- [ ] 3. **Was bedeutet es wenn eine Funktion einer Klasse („member function“) als const deklarert worden ist?  Wann sollte man eine Funktion einer Klasse als const deklarieren?**
+- [x] 3. **Was bedeutet es wenn eine Funktion einer Klasse („member function“) als const deklarert worden ist?  Wann sollte man eine Funktion einer Klasse als const deklarieren?**
    (What does it mean when a function of a class ("member function") has been declared const? When should one declare a function of a class as const?)
 
-- [ ] 4. **In C++ kann sich const auf unterschiedliche Teile eines Typs beziehen.  Nennen Sie zumindest zwei unterschiedliche Beispiele und erklaeren sie anhand dieser die entsprechende Implikation.**
+   It means that the function will not change the object on which they are called. One should declare a function of a class const when the function does not modify the instance of the class or to avoid accidental modifications. This will also let us use the function when we call the function from a const instance of the class.
+
+- [x] 4. **In C++ kann sich const auf unterschiedliche Teile eines Typs beziehen.  Nennen Sie zumindest zwei unterschiedliche Beispiele und erklaeren sie anhand dieser die entsprechende Implikation.**
    (In C ++, const can refer to different parts of a type. Give at least two different examples and explain the corresponding implication.)
+
+   1. `const vector<string> v1`
+      Indicates that the object `v1` is constant
+   2. `const vector<string> *vp = v1`
+      Indicates that the object that the pointer `vp` is pointing to is constant
+   3. `const vector<string> *const vp = v1`
+      Indicates that the pointer `vp` is constant, i.e. you can not change where `vp` is pointing to.
 
 - [ ] 5. **Erklaeren Sie die Bedeutung des Schluesselwortes constexpr und in welcher Situation dieses sinnvollerweise eingesetzt werden kann.**
    (Explain the meaning of the keyword constexpr and in which situation it can be usefully used.)
@@ -29,7 +42,7 @@
 - [x] 8. **Erklaeren Sie die Bedeutung des Schluesselwortes friend und wo dieses sinnvollerweise eingesetzt werden kann.**
    (Explain the meaning of the keyword friend and where this can be meaningfully used.)
 
-   It lets you declare another class or function as a friend, which lets them access private and protected members of the class where the friend declaration appears. One of the use cases would be when defining the std::istream and std::ostream operators.
+   It lets you declare another class or function as a friend, which lets them access private and protected members of the class where the friend declaration appears. One of the use cases would be when defining the std::istream and std::ostream operators. Another use case would be classes that have a close relationship to each other, for example: matrix and vector.
 
 - [ ] 9. **Erklaeren Sie den Unterschied zwischen Pointer und Reference. Worauf ist insbesondere bei Objekten, die auf dem Stack liegen aufzupassen?**
    (Explain the difference between Pointer and Reference. What is especially important for watching objects that are on the stack?)
