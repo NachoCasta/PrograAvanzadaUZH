@@ -31,7 +31,7 @@
 - [x] 6. **Erklaeren Sie die Bedeutung des Schluesselwortes inline und wie dieses sinnvollerweise eingesetzt werden kann, insbesondere im Zusammenhang von Projekten, die aus mehreren Objektdateien bestehen (und auch insbesondere wenn „link-time optimization“ nicht zur Verfuegung steht).**
    (Explain the meaning of the keyword inline and how it can be reasonably used, especially in the context of projects that consist of several object files (and especially if "link-time optimization" is not available).)
 
-   The inline keyword is used before a function declaration to create an "inline function". This has to be declared in a header file and the compiler will replace every call to this function with the function body, so that your program doesn't have to call the function all the time. It's very useful if you have a simple function that you use in many places but you don't want to copy and paste the same code all over your code
+   The inline keyword is used before a function declaration to create an "inline function". The compiler will replace every call to this function with the function body, so that your program doesn't have to call the function all the time. It's very useful if you have a simple function that you use in many places but you don't want to copy and paste the same code all over your code. If the inline function is going to be used globally (in different object files), the function has to be defined in the header file.
 
 - [x] 7. **Unter welchen Umstaenden gehoeren templates und als inline deklarierte Funktionen in die Headerdatei (*.h) und unter welchen in die Implementierungsdatei (*.cc)? Erklaeren Sie weshalb.**
    (Under what circumstances do templates and inline declared functions belong in the header file (* .h) and under which in the implementation file (* .cc)? Explain why.)
@@ -43,11 +43,15 @@
 
    It lets you declare another class or function as a friend, which lets them access private and protected members of the class where the friend declaration appears. One of the use cases would be when defining the std::istream and std::ostream operators. Another use case would be classes that have a close relationship to each other, for example: matrix and vector.
 
-- [ ] 9. **Erklaeren Sie den Unterschied zwischen Pointer und Reference. Worauf ist insbesondere bei Objekten, die auf dem Stack liegen aufzupassen?**
+- [x] 9. **Erklaeren Sie den Unterschied zwischen Pointer und Reference. Worauf ist insbesondere bei Objekten, die auf dem Stack liegen aufzupassen?**
    (Explain the difference between Pointer and Reference. What is especially important for watching objects that are on the stack?)
 
-- [ ] 10. **Was ist der unterschied zwischen einer virtuellen und nicht virtuellen "member function" (Methode)?  Wozu dient die virtuelle Methodentabelle?**
+   References cannot be changed to point to a different value.  It refers to the value, not to the location in memory where it's stored. They can change the value just like pointers but in an "invisible" way.
+
+- [x] 10. **Was ist der unterschied zwischen einer virtuellen und nicht virtuellen "member function" (Methode)?  Wozu dient die virtuelle Methodentabelle?**
    (What is the difference between a virtual and a non-virtual "member function" (method)? What is the virtual method table for?)
+
+   A virtual member function defines an interface to be used. They are meant to be overriden by the childrens that inherit the class which this functions belong to. The virtual method table is a table that is created for the virtual member function to decide the apropiate function to be called when the function is called, because you may not be able to tell this in compile time so it has to be done dynamically.
 
 - [x] 11. **C++ erlaubt es die Operatoren +, -, ``*``, /, etc zu ueberladen.  Worauf sollte man dabei (im Allgemeinen) im Sinne der Lesbarkeit des Programmes aufpassen?**
    (C ++ allows the operators +, -, ``*``, /, etc to be overloaded. What should be taken care of (in general) in terms of the readability of the program?)
@@ -63,8 +67,10 @@
    - Destructor
    It's important to make sure that we are managing the memory in the right way and that we are not leaving unfreed memory somewhere in the way.
 
-- [ ] 13. **Wie werden in C++ ueblicherweise benutzerdefinierte Ein- und Ausgaberoutinen implementiert?  Was ist im Fehlerfall zu beachten?**
+- [x] 13. **Wie werden in C++ ueblicherweise benutzerdefinierte Ein- und Ausgaberoutinen implementiert?  Was ist im Fehlerfall zu beachten?**
    (How is custom input and output routines implemented in C ++? What should be considered in case of error?)
+
+   You have to implement the std::istream and std::ostream operator and make sure that they also return an std::istream or a std::ostream, respectively.
 
 - [x] 14. **Wie koennen Sie in C++ einen benutzerdefinierten Konversionsoperator implementieren?**
    (How can you implement a custom conversion operator in C ++?)
@@ -112,19 +118,25 @@
 - [x] 19. **Vergleichen Sie eine trait Klasse mit einer puren virtuellen Klasse („interface“).**
    (Compare a trait class with a pure virtual class ("interface").)
 
-   Both trait and virtual classes are meant to define an interface to be used with the difference that virtual classes specify this interface in the class itself and traits lets you out source certain behaviours in a different class, so that you can specialize those behaviours in that class and then pass your trait to your class template.
+   Both trait and virtual classes are meant to define an interface to be used with the difference that virtual classes specify this interface in the class itself to be specialized through inheritance and traits lets you out source certain behaviours in a different class, so that you can specialize those behaviours in that class and then pass your trait to your class template as an argument.
 
-- [ ] 20. **Weshalb werden in C++ (wie auch in C) Headerdateien (``*``.h) benoetigt? Welche Artifakte gehoeren daher prinzipiell in die Headerdatei?**
+- [x] 20. **Weshalb werden in C++ (wie auch in C) Headerdateien (``*``.h) benoetigt? Welche Artifakte gehoeren daher prinzipiell in die Headerdatei?**
    (Why are header files (``*`` .h) required in C ++ (as well as in C)? Which artifacts are therefore part of the header file?)
 
-- [ ] 21. **Wozu wird der move constructor verwendet?**
+   They are required for separate compilation and store the object file's interfaces. Everything that's going to be exported (to be use outside of that file) should go in the header file, so that other files can know those interfaces. This includes: variable declarations, function declarations, type declarations, etc. Code that needs to be known in compile time also needs to go in the header. This includes: inline functions (if used globally) and templates.
+
+- [x] 21. **Wozu wird der move constructor verwendet?**
    (What is the move constructor used for?)
+
+   It's invoked by the compiler when it knows that the object will be destroyed after copying the object. It's used mostly to return values. That way, you can avoid copying the value twice.
 
 - [ ] 22. **Erklaeren Sie das „copy and swap“ Idiom. Was sind dessen Vorteile?**
    (Explain the "copy and swap" idiom. What are its advantages?)
 
-- [ ] 23. **Was ist ein function object?  Wie kann dieses sinnvoll verwendet werden? Was ist eine lambda function? Wie unterscheidet sich diese von einem function object?**
+- [x] 23. **Was ist ein function object?  Wie kann dieses sinnvoll verwendet werden? Was ist eine lambda function? Wie unterscheidet sich diese von einem function object?**
    (What is a function object? How can this be used meaningfully? What is a lambda function? How does this differ from a function object?)
+
+   It's an instance of a class that implements operator(). With this, you can for example store common information to be used for every different call of the function, like a max_value so far or something like that. A lambda function is an anonymous function object. It's very similar to a functin object, with the advantage that you can define it right were you are going to call it, so you could say it's more elegant. It also let's you keep state between calls to the function, just like a function object.
 
 - [ ] 24. **C++ erlaubt es statisch anhand von Typdefinitionen eines template parameters unterschiedliche Implementierungen einer Funktion auszuwaehlen (tag dispatching).  Erklaeren Sie den Mechanismus anhand eines Beispiels.**
    (C ++ allows the static selection of different implementations of a function based on type definitions of a template parameter (tag dispatching). Explain the mechanism with an example.)
@@ -132,17 +144,28 @@
 - [ ] 25. **C++ erlaubt es statisch mittels SFINAE (Substitution Failure Is Not An Error) anahnd von Eigenschaften eines templates unterschiedliche Implementierungen einer Funktion auszuwaehlen).  Erklaeren Sie die Funktionsweise.**
    (C ++ allows you to statically select different implementations of a function using SFINAE (Substitution Failure Is Not An Error). Explain how it works.)
 
-- [ ] 26. **Erklaeren Sie den unterschied zwischen „class Sub : [public, protected, private] Base“?  Was sind die Implikationen, insbesondere auch auf die Vererbung des Types der Basisklasse.**
+- [x] 26. **Erklaeren Sie den unterschied zwischen „class Sub : [public, protected, private] Base“?  Was sind die Implikationen, insbesondere auch auf die Vererbung des Types der Basisklasse.**
    (Explain the difference between "class Sub: [public, protected, private] Base"? What are the implications, especially on the inheritance of the type of the base class.)
 
-- [ ] 27. **Im Falle von Inheritance kann es zu slicing kommen?  Was ist dies und in welcher Situation tritt dieses Phaenomen?**
+   The keyword `public` is used to define a "is a" relationship. The child inherits the public and protected members of the inherited class and also inherits the type of the base class. `protected` and `private` are used to define a "has a" relationship. This makes the child inherit the public and protected members of the inherited class as protected and private, respectively and the child does not inherit the base class type.
+
+- [x] 27. **Im Falle von Inheritance kann es zu slicing kommen?  Was ist dies und in welcher Situation tritt dieses Phaenomen?**
    (Inheritance can lead to slicing? What is this and in which situation does this phenomenon occur?)
 
-- [ ] 28. **Erklaeren sie den Begriff binding im Zusammenhang mit inheritance.**
+   Yes. This happens when an instance of a SubClass is passed to a function expecting an instance of the base class. The function then uses the copy constructor of the base class and slices everything else that corresponds to the SubClass. In order to avoid this, we can pass the instance of the SubClass as a reference or a pointer. This can also occur during assignment.
+
+- [x] 28. **Erklaeren sie den Begriff binding im Zusammenhang mit inheritance.**
    (Explain the term binding in the context of inheritance.)
 
-- [ ] 29. **Erklaeren Sie die unterschliedlichen Arten von casts in C++.**
+   When you pass an instance of a SubClass to a function expecting an instance of the base class, even if it's by reference or pointer, the function will call the base class methods if needed, because those methods are binded to the base class. In order to solve this, you can declare the function virtual and it will decide during runtime which method to call, depending the case.
+
+- [x] 29. **Erklaeren Sie die unterschliedlichen Arten von casts in C++.**
    (Explain the different types of casts in C ++.)
+
+   - `static_cast<T>(o)` converts an object o into a given type T. Verified during compile time
+   - `dynamic_cast<T>(o)` checks if o is of type T and returns NULL if it is not. Verified during run time
+   - `reinterpret_cast<T>(o)` value of object o will be interpreted to be of type T. Not verified.
+
 
 - [ ] 30. **Erklaeren Sie das Liskov Substitution Principle.**
    (Explain the Liskov Substitution Principle.)
