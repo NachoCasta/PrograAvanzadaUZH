@@ -104,11 +104,15 @@
    - Allow flexibility cause iterator does not know about begin or end
    - If bounds are exceeded, you get an undefined behaviour (probably segmentation fault)
 
-- [ ] 18. **Was ist eine trait Klasse.**
+- [x] 18. **Was ist eine trait Klasse.**
    (What is a trait class.)
 
-- [ ] 19. **Vergleichen Sie eine trait Klasse mit einer puren virtuellen Klasse („interface“).**
+   It's a class used to factor out certain behaviours (possible in a template) in order to be able to specialize for different types. You could then pass the trait class to the template so that it knows how to behave with that data type.
+
+- [x] 19. **Vergleichen Sie eine trait Klasse mit einer puren virtuellen Klasse („interface“).**
    (Compare a trait class with a pure virtual class ("interface").)
+
+   Both trait and virtual classes are meant to define an interface to be used with the difference that virtual classes specify this interface in the class itself and traits lets you out source certain behaviours in a different class, so that you can specialize those behaviours in that class and then pass your trait to your class template.
 
 - [ ] 20. **Weshalb werden in C++ (wie auch in C) Headerdateien (``*``.h) benoetigt? Welche Artifakte gehoeren daher prinzipiell in die Headerdatei?**
    (Why are header files (``*`` .h) required in C ++ (as well as in C)? Which artifacts are therefore part of the header file?)
