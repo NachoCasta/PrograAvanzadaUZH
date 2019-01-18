@@ -4,10 +4,8 @@
 - [x] 1. **Wie koennen Mitglieder einer Klasse („class members“) im Konstruktor initialisiert warden, unabhaengig davon ob diese Mitglieder ueber einen „default constructor“ verfuegen oder nicht?**
    (How can members of a class (class members) be initialized in the constructor, regardless of whether these members have a default constructor or not?)
 
-   In the `:` section. This will initialize the members skipping the default constructor.
-
-   Example:
-
+   In the `:` section. This will initialize the members skipping the default constructor.\
+   Example:\
    `Fraction(int numerator, int denominator): n(numerator), d(denominator) { ... }`
 
 - [ ] 2. **Wie kann man verhindern, daß die vom Compiler generierten Klassenartefakte versehentlich verwendet werden (mit und ohne Verwendung von C++11 Funktionalitaet)?**
