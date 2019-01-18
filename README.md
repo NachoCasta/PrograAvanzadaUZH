@@ -5,8 +5,10 @@
    (How can members of a class (class members) be initialized in the constructor, regardless of whether these members have a default constructor or not?)
 
    In the `:` section. This will initialize the members skipping the default constructor.
+
    Example:
-     `Fraction(int numerator, int denominator): n(numerator), d(denominator) { ... }`
+
+   `Fraction(int numerator, int denominator): n(numerator), d(denominator) { ... }`
 
 - [ ] 2. **Wie kann man verhindern, daß die vom Compiler generierten Klassenartefakte versehentlich verwendet werden (mit und ohne Verwendung von C++11 Funktionalitaet)?**
    (How can you prevent the compiler-generated class artifacts from being inadvertently used (with and without the use of C ++ 11 functionality)?)
