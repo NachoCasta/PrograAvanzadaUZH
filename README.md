@@ -192,8 +192,16 @@
 
    Because try blocks in C++ invoke destructors in a deterministic way. When leaving the try block, it will deallocate memory associated with objects created inside the respective block.
 
-- [ ] 33. **Erklaeren Sie Komplexitaetsgarantien der C++ Container vector, map, set, list in Bezug auf Einfuegen und den Zugriff auf einzelene Objekte (jeweils am Anfang, am Ende, beziehungsweise an einer bestimmten anderen Position).**
+- [x] 33. **Erklaeren Sie Komplexitaetsgarantien der C++ Container vector, map, set, list in Bezug auf Einfuegen und den Zugriff auf einzelene Objekte (jeweils am Anfang, am Ende, beziehungsweise an einer bestimmten anderen Position).**
    (Explain complexity guarantees of the C ++ containers vector, map, set, list in terms of inserting and accessing individual objects (at the beginning, at the end, or at a certain other position).)
+
+   |        |           | access    |           |           | insert    |           |
+   |--------|-----------|-----------|-----------|-----------|-----------|-----------|
+   |        | beginning | middle    | end       | beginning | middle    | end       |
+   | vector | O(1)      | O(1)      | O(1)      |           | O(n)      | O(1)      |
+   | map    | O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) |
+   | set    | O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) |
+   | list   | O(1)      | O(n)      | O(n)      | O(1)      | O(1)      | O(1)      |
 
 - [x] 34. **Welche Routine bzw. Routinen werden am Anfang eines jeden C++ Programmes ausgefuehrt?**
    (Which routine or routines are executed at the beginning of every C ++ program?)
