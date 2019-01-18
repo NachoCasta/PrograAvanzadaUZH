@@ -7,8 +7,10 @@
    In the `:` section. This will initialize the members skipping the default constructor. Example:\
    `Fraction(int numerator, int denominator): n(numerator), d(denominator) { ... }`
 
-- [ ] 2. **Wie kann man verhindern, daß die vom Compiler generierten Klassenartefakte versehentlich verwendet werden (mit und ohne Verwendung von C++11 Funktionalitaet)?**
+- [x] 2. **Wie kann man verhindern, daß die vom Compiler generierten Klassenartefakte versehentlich verwendet werden (mit und ohne Verwendung von C++11 Funktionalitaet)?**
    (How can you prevent the compiler-generated class artifacts from being inadvertently used (with and without the use of C ++ 11 functionality)?)
+
+   By calling functions with a reference or pointer, to avoid the function from copying the object in every call.
 
 - [x] 3. **Was bedeutet es wenn eine Funktion einer Klasse („member function“) als const deklarert worden ist?  Wann sollte man eine Funktion einer Klasse als const deklarieren?**
    (What does it mean when a function of a class ("member function") has been declared const? When should one declare a function of a class as const?)
@@ -25,8 +27,10 @@
    3. `const vector<string> *const vp = v1`
       Indicates that the pointer `vp` is constant, i.e. you can not change where `vp` is pointing to.
 
-- [ ] 5. **Erklaeren Sie die Bedeutung des Schluesselwortes constexpr und in welcher Situation dieses sinnvollerweise eingesetzt werden kann.**
+- [x] 5. **Erklaeren Sie die Bedeutung des Schluesselwortes constexpr und in welcher Situation dieses sinnvollerweise eingesetzt werden kann.**
    (Explain the meaning of the keyword constexpr and in which situation it can be usefully used.)
+
+   This keyword allows you to use functions in constant expressions (which normally you cant). This way, the value will be computed in compile time. One of the uses cases could be in static_assert, where you need to compute everything in compile time.
 
 - [x] 6. **Erklaeren Sie die Bedeutung des Schluesselwortes inline und wie dieses sinnvollerweise eingesetzt werden kann, insbesondere im Zusammenhang von Projekten, die aus mehreren Objektdateien bestehen (und auch insbesondere wenn „link-time optimization“ nicht zur Verfuegung steht).**
    (Explain the meaning of the keyword inline and how it can be reasonably used, especially in the context of projects that consist of several object files (and especially if "link-time optimization" is not available).)
@@ -130,19 +134,25 @@
 
    It's invoked by the compiler when it knows that the object will be destroyed after copying the object. It's used mostly to return values. That way, you can avoid copying the value twice.
 
-- [ ] 22. **Erklaeren Sie das „copy and swap“ Idiom. Was sind dessen Vorteile?**
+- [x] 22. **Erklaeren Sie das „copy and swap“ Idiom. Was sind dessen Vorteile?**
    (Explain the "copy and swap" idiom. What are its advantages?)
+
+   It solves the problem of the right way of specifying the The Big Three. You need a well defined Copy constructor which is usually easy to define, a Destructor which is also easy and a Swap function. Then, to define the assignment operator, you create a temporary copy of your object and then swap it with the new data and finally destructing the copy which takes the old data with it.
 
 - [x] 23. **Was ist ein function object?  Wie kann dieses sinnvoll verwendet werden? Was ist eine lambda function? Wie unterscheidet sich diese von einem function object?**
    (What is a function object? How can this be used meaningfully? What is a lambda function? How does this differ from a function object?)
 
    It's an instance of a class that implements operator(). With this, you can for example store common information to be used for every different call of the function, like a max_value so far or something like that. A lambda function is an anonymous function object. It's very similar to a functin object, with the advantage that you can define it right were you are going to call it, so you could say it's more elegant. It also let's you keep state between calls to the function, just like a function object.
 
-- [ ] 24. **C++ erlaubt es statisch anhand von Typdefinitionen eines template parameters unterschiedliche Implementierungen einer Funktion auszuwaehlen (tag dispatching).  Erklaeren Sie den Mechanismus anhand eines Beispiels.**
+- [x] 24. **C++ erlaubt es statisch anhand von Typdefinitionen eines template parameters unterschiedliche Implementierungen einer Funktion auszuwaehlen (tag dispatching).  Erklaeren Sie den Mechanismus anhand eines Beispiels.**
    (C ++ allows the static selection of different implementations of a function based on type definitions of a template parameter (tag dispatching). Explain the mechanism with an example.)
 
-- [ ] 25. **C++ erlaubt es statisch mittels SFINAE (Substitution Failure Is Not An Error) anahnd von Eigenschaften eines templates unterschiedliche Implementierungen einer Funktion auszuwaehlen).  Erklaeren Sie die Funktionsweise.**
+   You can specialize templates for specific data types, with different implementations that suit that specific data type. The compiler will priorize the specified templates, so in case that a use also fits the general template, it will still choose a specified one if there is one available.
+
+- [x] 25. **C++ erlaubt es statisch mittels SFINAE (Substitution Failure Is Not An Error) anahnd von Eigenschaften eines templates unterschiedliche Implementierungen einer Funktion auszuwaehlen).  Erklaeren Sie die Funktionsweise.**
    (C ++ allows you to statically select different implementations of a function using SFINAE (Substitution Failure Is Not An Error). Explain how it works.)
+
+   When we invoke a function the compiler collects all functions that may be used and selects the most appropiate one for its arguments. If the function is generic and any of the parameters doesnt match, the compiler would normally stop, but would SFINAE it would continue, which would sometimes be a desirable behaviour.
 
 - [x] 26. **Erklaeren Sie den unterschied zwischen „class Sub : [public, protected, private] Base“?  Was sind die Implikationen, insbesondere auch auf die Vererbung des Types der Basisklasse.**
    (Explain the difference between "class Sub: [public, protected, private] Base"? What are the implications, especially on the inheritance of the type of the base class.)
@@ -167,35 +177,63 @@
    - `reinterpret_cast<T>(o)` value of object o will be interpreted to be of type T. Not verified.
 
 
-- [ ] 30. **Erklaeren Sie das Liskov Substitution Principle.**
+- [x] 30. **Erklaeren Sie das Liskov Substitution Principle.**
    (Explain the Liskov Substitution Principle.)
 
-- [ ] 31. **Wie funktioniert exception discrimination in C++?**
+   Every function/program must work the same when it is invoked with a subclass instead of the expected class.
+
+- [x] 31. **Wie funktioniert exception discrimination in C++?**
    (How does exception discrimination work in C ++?)
 
-- [ ] 32. **C++ verfuegt im Gegensatz zu anderen Programmiersprachen ueber kein finally Schluesselwort.  Wieso ist dieses in C++ nicht notwendig?  Erklaeren Sie Ihre Antwort anhand eines Beispiels.**
+   By order of the catch clauses, as if it was an if, else statement. Just like in Python and Java.
+
+- [x] 32. **C++ verfuegt im Gegensatz zu anderen Programmiersprachen ueber kein finally Schluesselwort.  Wieso ist dieses in C++ nicht notwendig?  Erklaeren Sie Ihre Antwort anhand eines Beispiels.**
    (Unlike other programming languages, C ++ does not have a finally keyword. Why is this not necessary in C ++? Explain your answer with an example.)
+
+   Because try blocks in C++ invoke destructors in a deterministic way. When leaving the try block, it will deallocate memory associated with objects created inside the respective block.
 
 - [ ] 33. **Erklaeren Sie Komplexitaetsgarantien der C++ Container vector, map, set, list in Bezug auf Einfuegen und den Zugriff auf einzelene Objekte (jeweils am Anfang, am Ende, beziehungsweise an einer bestimmten anderen Position).**
    (Explain complexity guarantees of the C ++ containers vector, map, set, list in terms of inserting and accessing individual objects (at the beginning, at the end, or at a certain other position).)
 
-- [ ] 34. **Welche Routine bzw. Routinen werden am Anfang eines jeden C++ Programmes ausgefuehrt?**
+- [x] 34. **Welche Routine bzw. Routinen werden am Anfang eines jeden C++ Programmes ausgefuehrt?**
    (Which routine or routines are executed at the beginning of every C ++ program?)
 
-- [ ] 35. **Wozu dient static_assert?  Erklaeren Sie anhand eines Beispiels in welchem Zusammenhang es sinnvoll ist.**
+   The main function.
+
+- [x] 35. **Wozu dient static_assert?  Erklaeren Sie anhand eines Beispiels in welchem Zusammenhang es sinnvoll ist.**
    (What is static_assert for? Explain by way of example in what context it makes sense.)
 
-- [ ] 36. **C++ verfuegt seit C++11 ueber initializer lists.  Wozu dienen diese?  Wie werden Sie in der Standard Library verwendet?  Wie kann man diese selber verwenden?**
+   It works like `assert` but the assertion is verified in compile time. A possible use case would be to make sure that a buffer is initialized with a minimum value, for example:/
+   ```
+   template<typename T, int N>
+     class Buffer {
+     static_assert(N>16, "Buffer size too small");
+   …
+   };
+   ```
+
+- [x] 36. **C++ verfuegt seit C++11 ueber initializer lists.  Wozu dienen diese?  Wie werden Sie in der Standard Library verwendet?  Wie kann man diese selber verwenden?**
    (C ++ has been using C ++ 11 via initializer lists. What are these for? How are you used in the standard library? How can you use it yourself?)
 
-- [ ] 37. **Erklaeren Sie wozu die Schluesselwoerter auto, decltype dienen.**
+   They represent a list of values and are usually used to accept a set of elements in the costructor or a function. They are used in the containers of the standard library in order to initialize them with a set of elements already inside. They can be used with the initializer_list<T> template and by using its iterator to access the given elements.
+
+- [x] 37. **Erklaeren Sie wozu die Schluesselwoerter auto, decltype dienen.**
    (Explain what the keywords auto, decltype are for.)
 
-- [ ] 38. **Wie kann seit C++11 ein thread gestartet werden und wie kann man anschliessend auf dessen Beendigung warten?**
+   The keyword auto is to let the compiler infer the type from the assigned expression. It has to be determined during compile time.\
+   The keyword decltype(e) returns the type of the expression e.
+
+- [x] 38. **Wie kann seit C++11 ein thread gestartet werden und wie kann man anschliessend auf dessen Beendigung warten?**
    (How can a thread be started since C ++ 11 and how can you wait for it to finish?)
 
-- [ ] 39. **Was sind variadic templates?  Wo finden diese in C++ Verwendung?**
+   To start them, they need to be passed a functor as an argument and they will be started immediately. You can use join to wait for the thread to finish.
+
+- [x] 39. **Was sind variadic templates?  Wo finden diese in C++ Verwendung?**
    (What are variadic templates? Where do these find use in C ++?)
 
-- [ ] 40. **Welche Eigenschaften haben „templates“ und „inheritance“ gemein? Was ist ein fundamentaler (der fundamentale) Unterschied dieser beiden Mechanismen.**
+   These are templates that have an undefined number of arguments. The functions identifies the arguments automatically. It can be useful in functions that accepts an undefined number of arguments of different types, like `printf`
+
+- [x] 40. **Welche Eigenschaften haben „templates“ und „inheritance“ gemein? Was ist ein fundamentaler (der fundamentale) Unterschied dieser beiden Mechanismen.**
    (What properties do "templates" and "inheritance" have in common? What is a fundamental (the fundamental) difference between these two mechanisms?)
+
+   Both let you specialize to different cases but they are "orthogonal" between them. Inheritance specializes in a vertical fashion, going deeper and deeper with classes haveing a relation between them. Templates, on the other hand, specialize in a horizontal way, having different implementations in the same level of abstraction, where the code knows nothing about the other templates code. Also, inheritance provides runtime specialization and templates do it in compiler time.
